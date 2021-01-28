@@ -1,4 +1,8 @@
-let secretNumber = 7;
+let secretNumber; 
+
+function randomInRange(min, max) {
+    secretNumber = Math.floor(Math.random() * (max - min) + min);
+}
 
 function checkGuess(num) {
     if (num > secretNumber) {
@@ -12,32 +16,20 @@ function checkGuess(num) {
         return true;
     }
 }
-function askGuess() {
-    
-
 const readline = require('readline');
 
 const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout
 });
-
-
-const handlefirstGuess = answer => {
-  
-    checkGuess (Number(answer));
-if((Number(answer)) === secretNumber){
-    console.log(`You win!`);
-    rl.close();
-} else {
-    rl.question("Guess Again", askGuess)
-}
-}
-
-
-rl.question('Enter a guess.', handlefirstGuess)
-    
-    // rl.close();
-}
+function askGuess() {
+rl.question('Enter a guess.   ', answer => {
+    if (checkGuess(Number(answer))) {
+        console.log(`You win!`);
+        rl.close();
+    } else {
+        askGuess();
+    }
+})}
 
 askGuess();
