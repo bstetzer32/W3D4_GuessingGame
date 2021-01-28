@@ -22,8 +22,22 @@ const rl = readline.createInterface({
     output: process.stdout
 });
 
-rl.question('Wanna play a game? Enter a guess.', answer => {
-    checkGuess(answer); rl.close();})
+
+const handlefirstGuess = answer => {
+  
+    checkGuess (Number(answer));
+if((Number(answer)) === secretNumber){
+    console.log(`You win!`);
+    rl.close();
+} else {
+    rl.question("Guess Again", askGuess)
+}
+}
+
+
+rl.question('Enter a guess.', handlefirstGuess)
+    
+    // rl.close();
 }
 
 askGuess();
