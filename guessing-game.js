@@ -1,8 +1,16 @@
-let secretNumber; 
+
 
 function randomInRange(min, max) {
-    secretNumber = Math.floor(Math.random() * (max - min) + min);
+    return Math.floor(Math.random() * (max - min) + min);
 }
+let secretNumber = randomInRange(1, 100); 
+
+let minMax = [];
+
+
+
+
+
 
 function checkGuess(num) {
     if (num > secretNumber) {
@@ -23,13 +31,40 @@ const rl = readline.createInterface({
     output: process.stdout
 });
 function askGuess() {
-rl.question('Enter a guess.   ', answer => {
-    if (checkGuess(Number(answer))) {
-        console.log(`You win!`);
-        rl.close();
-    } else {
-        askGuess();
-    }
-})}
+    rl.question('Enter a guess.', handleGuess)}
+const handleGuess = answer => {
+        if (checkGuess(Number(answer))) {
+            console.log(`You win!`);
+            rl.close();
+        } else {
+            askGuess();
+        }};
+    
 
-askGuess();
+
+
+
+function askRange(){
+
+    rl.question("Enter a max number", answer => {
+
+
+        minMax.push(answer);
+        rl.question("Enter a min number", answer => {
+    
+            minMax.push(answer); 
+            secretNumber = randomInRange(...minMax);
+    
+            console.log(`I'm thinking of a number between ${minMax[0]} & ${minMax[1]}`)
+            askGuess()
+    )})
+    }
+
+
+
+    
+    
+    
+    
+    
+    
